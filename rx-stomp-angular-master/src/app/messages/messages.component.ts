@@ -29,7 +29,7 @@ export class MessagesComponent implements OnInit, OnDestroy {
   }
 
   onSendMessage() {
-    const message = `Message generated at ${new Date()}`;
-    this.rxStompService.publish({ destination: '/topic/demo', body: message });
+    const message = `aloha new day ${new Date()}`;
+    this.rxStompService.publish({ destination: '/topic/price', body: message });
   }
 }

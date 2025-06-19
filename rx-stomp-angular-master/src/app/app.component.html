@@ -1,4 +1,10 @@
 <div style="text-align: center">
   <h1>Welcome to {{ title }}!</h1>
+  <nav>
+    <a routerLink="/messages" routerLinkActive="active-link">General Messages</a> |
+    <a routerLink="/class-messages/teacher123" routerLinkActive="active-link">Class Messages (teacher123)</a> |
+    <a routerLink="/class-messages/prof456" routerLinkActive="active-link">Class Messages (prof456)</a>
+  </nav>
 </div>
-<app-messages></app-messages>
+<hr>
+<router-outlet></router-outlet>

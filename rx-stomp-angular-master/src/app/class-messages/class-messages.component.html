@@ -1,0 +1,12 @@
+<p>class-messages works!</p>
+<div *ngIf="teacherUsername">
+  <h2>Enrollment Messages for: {{ teacherUsername }}</h2>
+  <div *ngIf="receivedEnrollmentMessages.length > 0; else noMessages">
+    <ul>
+      <li *ngFor="let message of receivedEnrollmentMessages">{{ message }}</li>
+    </ul>
+  </div>
+  <ng-template #noMessages>
+    <p>No enrollment messages received yet for {{ teacherUsername }}.</p>
+  </ng-template>
+</div>

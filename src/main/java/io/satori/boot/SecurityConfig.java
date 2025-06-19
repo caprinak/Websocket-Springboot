@@ -21,11 +21,15 @@ public class SecurityConfig {
                 // Disable CSRF protection for the WebSocket endpoint
                 // WebSocket/SockJS handshakes don't typically include CSRF tokens
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/ws/**") // Adjust path if needed
+                        .ignoringRequestMatchers(
+                                "/ws/**",                         // Keep ignoring for WebSockets
+                                "/api/test-notifications/**"      // Add this line to ignore for your test API
+                        ) // Adjust path if needed
                 ).cors(cors -> cors.configurationSource(corsConfigurationSource)) // Apply CORS configuration
                 // Configure authorization rules
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/ws/**").permitAll() // Allow all requests to your WebSocket endpoint
+                        .requestMatchers("/ws/**").permitAll()
+                        .requestMatchers("/api/test-notifications/**").permitAll()// Allow all requests to your WebSocket endpoint
                         // .requestMatchers("/api/**").authenticated() // Example: require auth for other API paths
                         .anyRequest().authenticated() // Require authentication for any other request by default
                 );

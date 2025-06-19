@@ -1,0 +1,23 @@
+### GET request to example server
+POST http://localhost:8080/api/test-notifications/user/teacher123
+    Content-Type: application/json
+
+{
+  "type": "NEW_ENROLLMENT_ALERT",
+  "studentName": "Jane Doe (Dummy)",
+  "courseName": "Introduction to WebSockets",
+  "message": "A new student has been enrolled in your course. Please check the dashboard.",
+
+}
+###
+POST http://localhost:8080/user/prof456
+    Content-Type: application/json
+
+{
+  "type": "NEW_ENROLLMENT_ALERT",
+  "studentName": "Jimmy Doe (Dummy)",
+  "courseName": "  Pro",
+  "message": "A new student has been enrolled in your course. Please check the dashboard.",
+  "timestamp": 1750321052837
+}
+
