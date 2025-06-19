@@ -1,0 +1,44 @@
+<nav>
+  <ul>
+    <li><a routerLink="/">Home (Original App Component)</a></li>
+    <li><a routerLink="/websocket-test">WebSocket Test</a></li>
+  </ul>
+</nav>
+<app-stock-tracker></app-stock-tracker>
+<router-outlet></router-outlet>
+
+<!-- Original Content - you might move this to a new 'home' component later
+<div>
+  <h1>WebSocket STOMP Client</h1>
+  <p>Connection Status: <strong>{{ isConnected ? 'Connected' : 'Disconnected' }}</strong></p>
+
+  <hr>
+
+  <div>
+    <h2>User Specific Enrollments (subscribes automatically on connect)</h2>
+    <div *ngIf="userEnrollment">
+      <pre>{{ userEnrollment | json }}</pre>
+    </div>
+    <div *ngIf="!userEnrollment && isConnected">
+      Waiting for user enrollment messages...
+    </div>
+  </div>
+
+  <hr>
+
+  <div>
+    <h2>Group Enrollments</h2>
+    <div>
+      <label for="groupId">Group ID to subscribe:</label>
+      <input type="text" id="groupId" [(ngModel)]="groupIdToSubscribe">
+      <button (click)="subscribeToGroup()" [disabled]="!isConnected">Subscribe to Group</button>
+    </div>
+    <div *ngIf="groupEnrollment">
+      <pre>{{ groupEnrollment | json }}</pre>
+    </div>
+    <div *ngIf="!groupEnrollment && isConnected">
+      Waiting for group enrollment messages (after subscribing)...
+    </div>
+  </div>
+
+</div> -->

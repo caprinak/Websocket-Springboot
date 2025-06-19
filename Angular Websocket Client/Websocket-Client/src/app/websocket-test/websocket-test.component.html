@@ -1,0 +1,53 @@
+<h2>STOMP WebSocket Test (NotificationService)</h2>
+
+<div>
+  <strong>Connection Status:</strong>
+  <span [ngClass]="{'status-connected': connectionStatus, 'status-disconnected': !connectionStatus}">
+    {{ connectionStatus ? 'Connected' : 'Disconnected' }}
+  </span>
+</div>
+<hr>
+
+<div>
+  <h3>Test User Notifications</h3>
+  <label for="username">Username to trigger notification for: </label>
+  <input type="text" id="username" [(ngModel)]="usernameToTrigger">
+  <button (click)="triggerTestUserNotification()">Send Test User Notification</button>
+</div>
+<hr>
+
+<div>
+  <h3>Subscribe to Group Enrollments</h3>
+  <label for="groupId">Group ID to subscribe to: </label>
+  <input type="text" id="groupId" [(ngModel)]="groupIdToSubscribe">
+  <button (click)="subscribeToGroup()">Subscribe to Group</button>
+  <p *ngIf="subscribedGroupId">Currently subscribed to group: {{ subscribedGroupId }}</p>
+</div>
+<hr>
+
+<div>
+  <button (click)="clearMessages()">Clear Displayed Messages</button>
+</div>
+
+<h3>Received User Enrollment Messages:</h3>
+<div *ngIf="userEnrollmentMessages.length === 0">No user enrollment messages received yet.</div>
+<ul>
+  <li *ngFor="let msg of userEnrollmentMessages; let i = index">
+    <pre>{{ msg | json }}</pre>
+  </li>
+</ul>
+
+<h3>Received Group Enrollment Messages (for group: {{ subscribedGroupId || 'None' }}):</h3>
+<div *ngIf="groupEnrollmentMessages.length === 0">No group enrollment messages received yet for the current group.</div>
+<ul>
+  <li *ngFor="let msg of groupEnrollmentMessages; let i = index">
+    <pre>{{ msg | json }}</pre>
+  </li>
+</ul>
+
+<style>
+  .status-connected { color: green; }
+  .status-disconnected { color: red; }
+  hr { margin: 15px 0; }
+  pre { background-color: #f4f4f4; padding: 5px; border: 1px solid #ddd; }
+</style>
