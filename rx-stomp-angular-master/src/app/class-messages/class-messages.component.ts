@@ -39,13 +39,26 @@ export class ClassMessagesComponent implements OnInit, OnDestroy {
       })
     ).subscribe(
       (message: Message) => {
-        this.receivedEnrollmentMessages.push(`Enrollment for ${this.teacherId}: ${message.body}`);
-        console.log('Received message on user queue:', message.body);
-      },
+  try {
+    // The backend sends a JSON string, so we parse it into an object
+    const notificationPayload = JSON.parse(message.body);
+
+    // Now you can work with the object's properties
+    console.log('Received notification object:', notificationPayload);
+    this.receivedEnrollmentMessages.push(JSON.stringify(notificationPayload)); // Store the whole object
+
+  } catch (e) {
+    console.error('Could not parse incoming message as JSON:', message.body);
+    // Fallback for non-JSON messages if needed
+    this.receivedEnrollmentMessages.push(message.body);
+  }
+},
       (error) => {
         console.error(`Error receiving message on user queue for ${this.teacherId}:`, error);
       }
     );
+
+    
   }
 
   ngOnDestroy(): void {
