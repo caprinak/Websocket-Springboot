@@ -12,7 +12,7 @@ import { switchMap } from 'rxjs/operators';
 })
 
 export class ClassMessagesComponent implements OnInit, OnDestroy {
-  public teacherUsername: string | null = null;
+  public teacherId: string | null = null;
   public receivedEnrollmentMessages: string[] = [];
   private enrollmentSubscription: Subscription | undefined;
 
@@ -25,25 +25,25 @@ export class ClassMessagesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.enrollmentSubscription = this.route.paramMap.pipe(
       switchMap(params => {
-        this.teacherUsername = params.get('teacherUsername');
+        this.teacherId = params.get('teacherId');
         this.receivedEnrollmentMessages = []; // Clear messages when username changes
 
-        if (!this.teacherUsername) {
+        if (!this.teacherId) {
           console.warn('Teacher username is not present in the route.');
           return []; // Return an empty observable or handle error appropriately
         }
 
-        const destination = `/user/${this.teacherUsername}/queue/enrollments`;
+        const destination = `/user/${this.teacherId}/queue/enrollments`;
         console.log(`Subscribing to user-specific queue: ${destination}`);
         return this.rxStompService.watch(destination);
       })
     ).subscribe(
       (message: Message) => {
-        this.receivedEnrollmentMessages.push(`Enrollment for ${this.teacherUsername}: ${message.body}`);
+        this.receivedEnrollmentMessages.push(`Enrollment for ${this.teacherId}: ${message.body}`);
         console.log('Received message on user queue:', message.body);
       },
       (error) => {
-        console.error(`Error receiving message on user queue for ${this.teacherUsername}:`, error);
+        console.error(`Error receiving message on user queue for ${this.teacherId}:`, error);
       }
     );
   }

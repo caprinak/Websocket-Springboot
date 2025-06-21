@@ -19,8 +19,8 @@ public class TestNotificationController {
     @Autowired
     private NotificationService notificationService;
 
-    @PostMapping("/user/{username}")
-    public ResponseEntity<String> sendTestUserNotification(@PathVariable String username) {
+    @PostMapping("/user/{userId}")
+    public ResponseEntity<String> sendTestUserNotification(@PathVariable Long userId) {
         // Option 1: Using a Map for the payload
         Map<String, Object> dummyPayload = new HashMap<>();
         dummyPayload.put("type", "NEW_ENROLLMENT_ALERT");
@@ -29,12 +29,12 @@ public class TestNotificationController {
         dummyPayload.put("message", "A new student has been enrolled in your course. Please check the dashboard.");
         dummyPayload.put("timestamp", System.currentTimeMillis());
 
-        notificationService.sendEnrollmentNotificationToTeacher(username, dummyPayload);
-        return ResponseEntity.ok("Test user notification sent to " + username);
+        notificationService.sendEnrollmentNotificationToTeacher(userId, dummyPayload);
+        return ResponseEntity.ok("Test user notification sent to " + userId);
     }
 
-    @PostMapping("/user-dto/{username}")
-    public ResponseEntity<String> sendTestUserDtoNotification(@PathVariable String username) {
+    @PostMapping("/user-dto/{userId}")
+    public ResponseEntity<String> sendTestUserDtoNotification(@PathVariable Long userId) {
         // Option 2: Using the DTO (if you created EnrollmentNotification.java)
         EnrollmentNotification dummyDtoPayload = new EnrollmentNotification(
                 "NEW_ENROLLMENT_DTO",
@@ -43,7 +43,7 @@ public class TestNotificationController {
                 "DTO: New student enrollment processed."
         );
 
-        notificationService.sendEnrollmentNotificationToTeacher(username, dummyDtoPayload);
-        return ResponseEntity.ok("Test user DTO notification sent to " + username);
+        notificationService.sendEnrollmentNotificationToTeacher(userId, dummyDtoPayload);
+        return ResponseEntity.ok("Test user DTO notification sent to " + userId);
     }
 }

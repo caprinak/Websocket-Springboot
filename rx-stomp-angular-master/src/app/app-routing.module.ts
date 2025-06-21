@@ -5,7 +5,7 @@ import { ClassMessagesComponent } from './class-messages/class-messages.componen
 
 const routes: Routes = [
   { path: 'messages', component: MessagesComponent },
-  { path: 'class-messages/:teacherUsername', component: ClassMessagesComponent },
+  { path: 'class-messages/:teacherId', component: ClassMessagesComponent },
   // Optional: Add a default route or a redirect
   { path: '', redirectTo: '/messages', pathMatch: 'full' },
   // Optional: Add a wildcard route for 404
